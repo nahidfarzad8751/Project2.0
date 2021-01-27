@@ -3,10 +3,10 @@ body {
   margin: 0;
 }
 
-#map,
-body,
-html {
-  height: 100%;
+/* #map, */
+/* body, */
+div#map.leaflet-container.leaflet-touch {
+  height: 400px !important;
 }
 
 .leaflet-popup-content {

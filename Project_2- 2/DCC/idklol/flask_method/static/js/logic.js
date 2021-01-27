@@ -7,6 +7,7 @@ let FEATURE = "Happiness_Score";
 // Happiness_Score
 // Health
 // Trust
+console.log("RANDOM TEST");
 
 var map = L.map("map").setView([37.8, -96], 3);
 
