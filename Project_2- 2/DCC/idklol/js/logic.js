@@ -1,5 +1,13 @@
 //https://gist.github.com/nickpeihl/b6d09258bed0cafdd653de2278f96c17
 
+let FEATURE = "Happiness_Score";
+// Family
+// Freedom// Currently all zeroes
+// Happiness_Rank
+// Happiness_Score
+// Health
+// Trust
+
 var map = L.map("map").setView([37.8, -96], 3);
 
 var satellitemap = L.tileLayer(
@@ -61,20 +69,17 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
   this._div.innerHTML =
-    "<h4>US Population Density</h4>" +
+    "<h4>World Happiness Feature of Interest</h4>" +
     (props
-      ? "<b>" +
-        props.name +
-        "</b><br />" +
-        props.Health +
-        " people / mi<sup>2</sup>"
-      : "Hover over a state");
+      ? "<b>" + props.name + "</b><br />" + FEATURE + ": " + props[FEATURE]
+      : //" people / mi<sup>2</sup>"
+        "Hover over a state");
 };
 
 info.addTo(map);
 
 // get color depending on population density value
-function getColorOpacityHealth(d) {
+function getColorFeatureOpacity(d) {
   return d < 0.001 ? 1 : 1; //condition ? exprIfTrue : exprIfFalse
 }
 
@@ -82,18 +87,21 @@ function getColorOpacityHealth(d) {
 function getMaxMin(arr, prop) {
   var max;
   var min;
-  ////console.log(arr);
-  console.log(arr.length);
+  console.log(`The property being looped is: ${prop}`);
+  //console.log(arr.length);
   for (var i = 0; i < arr.length - 1; i++) {
-    if (max == null || parseInt(arr[i].properties[prop]) > parseInt(max))
+    if (max == null || parseInt(arr[i].properties[prop]) >= parseInt(max))
       max = arr[i].properties[prop];
     max_dict = arr[i].properties;
     if (min == null || parseInt(arr[i].properties[prop]) < parseInt(min))
       min = arr[i].properties[prop];
     min_dict = arr[i].properties;
+    //console.log(max_dict.Health);
   }
-
-  console.log(`$The max Value for the ${prop} feature is: {$max}`);
+  // min = min_dict[FEATURE];
+  // max = max_dict[FEATURE];
+  console.log(typeof max, prop, "LOLOLOLOL");
+  console.log(`$The max Value for the ${prop} feature is: ${max}`);
   console.log(`$The max Object for the ${prop} feature is: `, max_dict);
 
   console.log(`$The min Value for the ${prop} feature is: ${min}`);
@@ -101,7 +109,7 @@ function getMaxMin(arr, prop) {
 
   return [min, max];
 }
-var [Min, Max] = getMaxMin(statesData.features, "Health");
+var [Min, Max] = getMaxMin(statesData.features, FEATURE);
 
 console.log(Min, Max);
 // https://gka.github.io/chroma.js/
@@ -111,7 +119,7 @@ function getColorofFeature(d) {
   scale = chroma
     .scale(["red", "blue", "green"])
     .domain([Min, Max], 10, "quantiles");
-  console.log(d);
+  //console.log(d);
   return d == null ? chroma("black").darken().hex() : scale(d).hex();
   //condition ? exprIfTrue : exprIfFalse
 }
@@ -123,10 +131,10 @@ function style(feature) {
     opacity: 1,
     color: "white", //border color
     dashArray: "4",
-    fillOpacity: getColorOpacityHealth(feature.properties.Health), // 0.7,
-    fillColor: getColorofFeature(feature.properties.Health),
+    fillOpacity: getColorFeatureOpacity(feature.properties[FEATURE]), // 0.7,
+    fillColor: getColorofFeature(feature.properties[FEATURE]),
   };
-  console.log(feature);
+  //console.log(feature);
 }
 
 function highlightFeature(e) {
@@ -188,10 +196,11 @@ legend.onAdd = function (map) {
   for (var i = 0; i < grades.length - 1; i++) {
     to = grades[i];
     from = grades[i + 1];
+    //console.log(typeof from);
     console.log(`From: ${from.toFixed(3)}, To: ${to.toFixed(3)}`);
     labels.push(
       '<i style="background:' +
-        scale(from).hex() + //getColorHealth(from + 1) +
+        scale(from).hex() +
         '"></i> ' +
         from.toFixed(3) +
         "--" +
