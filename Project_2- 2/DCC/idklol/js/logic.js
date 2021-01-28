@@ -1,6 +1,6 @@
 //https://gist.github.com/nickpeihl/b6d09258bed0cafdd653de2278f96c17
-
-//let FEATURE = "Trust";
+//console.log(FEATURE);
+let FEATURE = "Trust";
 // Family
 // Freedom// Currently all zeroes
 // Happiness_Rank

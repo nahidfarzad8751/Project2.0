@@ -1,5 +1,4 @@
-const FEATURE = "Happiness_Rank";
-
+const FEATURE = "Health";
 // Family
 // Freedom// Currently all zeroes
 // Happiness_Rank
