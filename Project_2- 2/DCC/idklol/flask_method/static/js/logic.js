@@ -1,13 +1,14 @@
 //https://gist.github.com/nickpeihl/b6d09258bed0cafdd653de2278f96c17
 
-let FEATURE = "Happiness_Score";
+console.log(FEATURE);
+//let FEATURE = "Happiness_Score";
 // Family
 // Freedom// Currently all zeroes
 // Happiness_Rank
 // Happiness_Score
 // Health
 // Trust
-console.log("RANDOM TEST");
+//console.log("RANDOM TEST");
 
 var map = L.map("map").setView([37.8, -96], 3);
 
