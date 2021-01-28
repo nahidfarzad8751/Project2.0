@@ -60,8 +60,8 @@ for index, row in happiness_rank.iterrows():
     current_row["Freedom"]= row.Freedom
     current_row["Year"]=row.Year
     current_row['Generosity'] = row.Generosity
-    current_row['Happiness Rank'] = row.Happiness_Rank
-    current_row['Happiness Score'] = row.Happiness_Score
+    current_row['Happiness_Rank'] = row.Happiness_Rank
+    current_row['Happiness_Score'] = row.Happiness_Score
     current_row['Economy'] = row.Economy
     current_row['Health'] = row.Health
     # current_row['Trust'] = row.Trust

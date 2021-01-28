@@ -1,6 +1,7 @@
 console.log("starting first visualization")
 d3.json("/db").then(data => {
     console.log(data)
+   
 })
 
 
